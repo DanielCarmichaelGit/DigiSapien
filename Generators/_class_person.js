@@ -191,4 +191,4 @@ const digiSapien = new Person(
 );
 
 
-console.log(digiSapien)
+console.log(digiSapien);
