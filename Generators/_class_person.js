@@ -31,7 +31,7 @@ function generatePersonality() {
     const randFloat = Math.random() * 101;
     var statistical_personality = "";
 
-        if ( randFloat <= 2.1 && randFloat > 0 ) {
+        if ( randFloat <= 2.1 && randFloat >= 0 ) {
             statistical_personality = "intj";
         }
         else if ( randFloat <= 5.4 && randFloat > 2.1 ) {
@@ -76,7 +76,7 @@ function generatePersonality() {
         else if ( randFloat <= 97.5 && randFloat > 89 ) {
             statistical_personality = "esfp";
         }
-        else if ( randFloat <= 100.0 && randFloat > 97.5 ) {
+        else if ( randFloat <= 100.0 && randFloat > 97.5) {
             statistical_personality = "enfj";
         }
 
@@ -173,6 +173,7 @@ function generateTraitsFemale() {
     const social_neediness = Math.random() * 101;
 
     return {
+        "gender": "female",
         "hair_color": hair_color,
         "height": height,
         "face": {
@@ -278,6 +279,7 @@ function generateTraitsMale() {
     const social_neediness = Math.random() * 101;
 
     return {
+        "gender": "male",
         "hair_color": hair_color,
         "height": height,
         "face": {
@@ -295,8 +297,8 @@ function generateTraitsMale() {
 
 var persons_gender = generateTraitsFemale();
 
-if (gender >= 0.5) {
-    return persons_gender = generateTraitsMale();
+if (gender >= 50) {
+    persons_gender = generateTraitsMale();
 };
 
 const digiSapien = new Person(
@@ -304,5 +306,6 @@ const digiSapien = new Person(
     persons_gender
 );
 
-console.lop(persons_gender);
+//console.log(gender);
+//console.log(persons_gender);
 console.log(digiSapien);
