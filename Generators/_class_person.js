@@ -1,3 +1,17 @@
+const _ = require('lodash');
+
+// READ THIS MESSAGE @Brandon
+// In my mind, this project is primarilly front end.
+// This script generates the digiSapien.
+// the digiSapien will be presented on the ui and will be owned by the user who generated them.
+// So, if a black male with a little nose and thin lips is generated, the user who generated the person
+// will see a black male with the afforementioned characteristics on the ui.
+
+// ^^This all means that we will need some way (potentially 8 or 16 bit graphics)
+// that combine and create the person. Btw, person refers to the digiSapien and user refers
+// to the real world person that created the digiSapien within the context of this message
+
+
 const {personalities} = require('../Personalities/_data_personalities.js')
 
 class Person {
@@ -6,6 +20,9 @@ class Person {
         this.charicteristics = charicteristics;
     }
 }
+
+// definitely a better way to do the generations. Want to get major ideas on the board before
+// dedicating mind numbing hours to refactoring.. Develop then refactor rather than refactor while developing
 
 function generatePersonality() {
     const randFloat = Math.random() * 101;
@@ -71,7 +88,7 @@ function generateTraitsMale() {
     var height = 0;
 
     // calculate hair
-    if ( randHair <= 85 && randHair > 0 ) {
+    if ( randHair <= 85 && randHair >= 0 ) {
         hair_color = "black";
     }
     else if ( randHair <= 96 && randHair > 85 ) {
@@ -88,7 +105,7 @@ function generateTraitsMale() {
     }
 
     // calculate height
-    if ( randHeight <= 1 && randHeight > 0 ) {
+    if ( randHeight <= 1 && randHeight >= 0 ) {
         height = 63;
     }
     else if ( randHeight <= 4 && randHeight > 1 ) {
@@ -112,7 +129,7 @@ function generateTraitsMale() {
     else if ( randHeight <= 67 && randHeight > 50 ) {
         height = 70;
     }
-    else if ( randHeight <= 79 && randHeight > 97 ) {
+    else if ( randHeight <= 79 && randHeight > 67 ) {
         height = 71;
     }
     else if ( randHeight <= 86 && randHeight > 79 ) {
@@ -127,17 +144,50 @@ function generateTraitsMale() {
     else if ( randHeight <= 99 && randHeight > 96 ) {
         height = 75;
     }
-    else if ( randHeight <= 100 && randHeight > 99 ) {
+    else if ( randHeight > 99 ) {
         height = 76;
+    }
+
+    //calculate face && body type
+    const lips = _.sample(["thin", "recessed", "normal", "full", "asymmetrical"]);
+    const nose = _.sample(["thin", "long", "wide", "short", "bulbous"]);
+    const brows = _.sample(["uni", "wide", "thin", "bushy", "normal", "high", "low"]);
+    const faceShape = _.sample(["heart", "oval", "long", "square"]);
+    const hair = _.sample(["curly", "straight", "wavy", "bald"]);
+    const weight = _.sample(["malnorished", "thin", "fat", "obese", "supremely fat", "cut", "muscular", "jacked"]);
+    const education = _.sample(["none", "high school diploma", "Bachelor Degree", "Master Degree", "PhD"]);
+
+    // social_neediness describes the relationship between this digiSapien and
+    // and their need to interact. Meaning that a score of 100 indicates a very socially
+    // needy person. If the score is 100, they post every day. If a score is 0, they post every 120 days. 
+    // This will help us determine how often an individual posts on social media,
+    // how outgoing they are (without regard to their personality type).
+
+    // Why differentiate?
+    // The Personality type will help us later when we begin to
+    // define how this person speaks when posting and the sn score
+    // will help when we define how often they post
+    const social_neediness = Math.random() * 101;
+
+    return {
+        "hair_color": hair_color,
+        "height": height,
+        "face": {
+            "shape": faceShape,
+            "brows": brows,
+            "lips": lips,
+            "nose": nose
+        },
+        "hair": hair,
+        "weight": weight,
+        "education": education,
+        "social_neediness": social_neediness
     }
 }
 
 const digiSapien = new Person(
-    generatePersonality(),
-    {
-        "hair": "blonde",
-        "skin_color": "white"
-    }
+    personalities[generatePersonality()],
+    generateTraitsMale()
 );
 
 
