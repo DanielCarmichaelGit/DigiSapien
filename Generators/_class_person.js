@@ -1,5 +1,8 @@
 const _ = require('lodash');
 
+const gender = Math.random() * 101;
+
+
 // READ THIS MESSAGE @Brandon
 // In my mind, this project is primarilly front end.
 // This script generates the digiSapien.
@@ -80,7 +83,7 @@ function generatePersonality() {
     return statistical_personality;
 }
 
-function generateTraitsMale() {
+function generateTraitsFemale() {
 
     const randHair = Math.random() * 101;
     const randHeight = Math.random() * 101;
@@ -185,10 +188,121 @@ function generateTraitsMale() {
     }
 }
 
+function generateTraitsMale() {
+
+    const randHair = Math.random() * 101;
+    const randHeight = Math.random() * 101;
+    var hair_color = "";
+    var height = 0;
+
+    // calculate hair
+    if ( randHair <= 85 && randHair >= 0 ) {
+        hair_color = "black";
+    }
+    else if ( randHair <= 96 && randHair > 85 ) {
+        hair_color = "brown";
+    }
+    else if ( randHair <= 98 && randHair > 96 ) {
+        hair_color = "blonde";
+    }
+    else if ( randHair <= 98 && randHair > 99 ) {
+        hair_color = "red";
+    }
+    else if ( randHair <= 100 && randHair > 99 ) {
+        hair_color = "white";
+    }
+
+    // calculate height
+    if ( randHeight <= 1 && randHeight >= 0 ) {
+        height = 58;
+    }
+    else if ( randHeight <= 4 && randHeight > 1 ) {
+        height = 59;
+    }
+    else if ( randHeight <= 8 && randHeight > 4 ) {
+        height = 60;
+    }
+    else if ( randHeight <= 14 && randHeight > 8 ) {
+        height = 61;
+    }
+    else if ( randHeight <= 21 && randHeight > 14 ) {
+        height = 62;
+    }
+    else if ( randHeight <= 33 && randHeight > 21 ) {
+        height = 63;
+    }
+    else if ( randHeight <= 50 && randHeight > 33 ) {
+        height = 64;
+    }
+    else if ( randHeight <= 67 && randHeight > 50 ) {
+        height = 65;
+    }
+    else if ( randHeight <= 79 && randHeight > 67 ) {
+        height = 66;
+    }
+    else if ( randHeight <= 86 && randHeight > 79 ) {
+        height = 67;
+    }
+    else if ( randHeight <= 92 && randHeight > 86 ) {
+        height = 68;
+    }
+    else if ( randHeight <= 96 && randHeight > 92 ) {
+        height = 69;
+    }
+    else if ( randHeight <= 99 && randHeight > 96 ) {
+        height = 70;
+    }
+    else if ( randHeight > 99 ) {
+        height = 71;
+    }
+
+    //calculate face && body type
+    const lips = _.sample(["thin", "recessed", "normal", "full", "asymmetrical"]);
+    const nose = _.sample(["thin", "long", "wide", "short", "bulbous"]);
+    const brows = _.sample(["uni", "wide", "thin", "bushy", "normal", "high", "low"]);
+    const faceShape = _.sample(["heart", "oval", "long", "square"]);
+    const hair = _.sample(["curly", "straight", "wavy", "bald"]);
+    const weight = _.sample(["malnorished", "thin", "fat", "obese", "supremely fat", "cut", "muscular", "jacked"]);
+    const education = _.sample(["none", "high school diploma", "Bachelor Degree", "Master Degree", "PhD"]);
+
+    // social_neediness describes the relationship between this digiSapien and
+    // and their need to interact. Meaning that a score of 100 indicates a very socially
+    // needy person. If the score is 100, they post every day. If a score is 0, they post every 120 days. 
+    // This will help us determine how often an individual posts on social media,
+    // how outgoing they are (without regard to their personality type).
+
+    // Why differentiate?
+    // The Personality type will help us later when we begin to
+    // define how this person speaks when posting and the sn score
+    // will help when we define how often they post
+    const social_neediness = Math.random() * 101;
+
+    return {
+        "hair_color": hair_color,
+        "height": height,
+        "face": {
+            "shape": faceShape,
+            "brows": brows,
+            "lips": lips,
+            "nose": nose
+        },
+        "hair": hair,
+        "weight": weight,
+        "education": education,
+        "social_neediness": social_neediness
+    }
+}
+
+var persons_gender = generateTraitsFemale();
+
+if (gender >= 0.5) {
+    return persons_gender = generateTraitsMale();
+};
+
 const digiSapien = new Person(
     personalities[generatePersonality()],
-    generateTraitsMale()
+    persons_gender
 );
 
-
+console.lop(persons_gender);
 console.log(digiSapien);
