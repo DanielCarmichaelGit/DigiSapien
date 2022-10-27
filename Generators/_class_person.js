@@ -306,6 +306,8 @@ const digiSapien = new Person(
     persons_gender
 );
 
+exports.digiSapien = digiSapien;
+
 //console.log(gender);
 //console.log(persons_gender);
-console.log(digiSapien);
+//console.log(digiSapien);
